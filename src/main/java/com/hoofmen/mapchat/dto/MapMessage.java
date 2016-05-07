@@ -1,34 +1,21 @@
 package com.hoofmen.mapchat.dto;
 
 public class MapMessage {
-	private long lon;
-	private long lat;
+	private Location location;
 	private String message;
 	private int duration;
 	
 	/**
-	 * @return the lon
+	 * @return the location
 	 */
-	public long getLon() {
-		return lon;
+	public Location getLocation() {
+		return location;
 	}
 	/**
-	 * @param lon the lon to set
+	 * @param location the location to set
 	 */
-	public void setLon(long lon) {
-		this.lon = lon;
-	}
-	/**
-	 * @return the lat
-	 */
-	public long getLat() {
-		return lat;
-	}
-	/**
-	 * @param lat the lat to set
-	 */
-	public void setLat(long lat) {
-		this.lat = lat;
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 	/**
 	 * @return the message
@@ -54,5 +41,4 @@ public class MapMessage {
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-
 }
