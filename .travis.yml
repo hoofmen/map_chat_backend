@@ -9,10 +9,10 @@ before_install:
 script: 
   mvn clean compile install
   
-deploy:
-  provider: gae
-  keyfile: client_secret.json
-  project: winter-agility-399
+#deploy:
+#  provider: gae
+#  keyfile: client_secret.json
+#  project: winter-agility-399
   
 after_success:
 
