@@ -35,7 +35,7 @@ public class AuthenticationFilter implements Filter {
 				if (response instanceof HttpServletResponse) {
 					HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 					httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-					httpServletResponse.getOutputStream().write("UNAUTHORIZED".getBytes());
+					httpServletResponse.getOutputStream().write("UNAUTHORIZED. CTM".getBytes());
 				}
 			}
 		}
