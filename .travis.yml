@@ -8,11 +8,20 @@ before_install:
 
 script: 
   mvn clean compile install
+
+before_deploy:
+  - mvn appengine:update
   
 #deploy:
 #  provider: gae
 #  keyfile: client_secret.json
 #  project: winter-agility-399
+#  config: src/main/webapp/WEB-INF/appengine-web.xml
+#  on:
+#    jdk: oraclejdk7
+#cache:
+#  directories:
+#  - $HOME/.m2
   
 after_success:
 
