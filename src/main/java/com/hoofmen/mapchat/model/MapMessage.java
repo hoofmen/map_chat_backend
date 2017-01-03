@@ -1,4 +1,4 @@
-package com.hoofmen.mapchat.dto;
+package com.hoofmen.mapchat.model;
 
 public class MapMessage {
 	private Location location;

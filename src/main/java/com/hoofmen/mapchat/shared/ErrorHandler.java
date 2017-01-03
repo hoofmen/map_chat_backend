@@ -1,0 +1,52 @@
+package com.hoofmen.mapchat.shared;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
+
+/**
+ * Created by osman on 1/2/17.
+ */
+@ControllerAdvice
+public class ErrorHandler {
+    //TODO: This needs some refactoring
+
+    @Autowired
+    private MessageSource messageSource;
+
+    @ExceptionHandler(UrlParamNotFoundException.class)
+    @ResponseStatus(value= HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public AppMessage urlParamNotFound(HttpServletRequest req, UrlParamNotFoundException ex) {
+        Locale locale = LocaleContextHolder.getLocale();
+        String errorMessage = messageSource.getMessage(ex.getCode(), null, locale);
+        String errorCode = ex.getCode();
+        AppMessage appMessage = new AppMessage();
+        appMessage.setCode(errorCode);
+        appMessage.setMessage(errorMessage);
+
+        return appMessage;
+    }
+
+    @ExceptionHandler(MessagesNotFoundException.class)
+    @ResponseStatus(value= HttpStatus.OK)
+    @ResponseBody
+    public AppMessage messagesNotFound(HttpServletRequest req, MessagesNotFoundException ex) {
+        Locale locale = LocaleContextHolder.getLocale();
+        String errorMessage = messageSource.getMessage(ex.getCode(), null, locale);
+        String errorCode = ex.getCode();
+        AppMessage appMessage = new AppMessage();
+        appMessage.setCode(errorCode);
+        appMessage.setMessage(errorMessage);
+
+        return appMessage;
+    }
+}
