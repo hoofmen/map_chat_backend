@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hoofmen.mapchat.utils.AppConstants;
+import com.hoofmen.mapchat.shared.AppConstants;
 
 /*
  * Filter class to authenticate the rest calls for DataService.

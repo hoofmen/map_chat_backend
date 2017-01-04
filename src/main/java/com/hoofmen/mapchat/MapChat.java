@@ -1,24 +1,14 @@
 package com.hoofmen.mapchat;
 
-import java.util.List;
-import java.util.Random;
-
-import com.hoofmen.mapchat.shared.UrlParamNotFoundException;
 import com.hoofmen.mapchat.messages.MessageService;
-import com.hoofmen.mapchat.utils.AppConstants;
+import com.hoofmen.mapchat.messages.beans.Location;
+import com.hoofmen.mapchat.messages.beans.MapMessageRequest;
+import com.hoofmen.mapchat.messages.beans.MapMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import com.hoofmen.mapchat.model.ViewArea;
-import com.hoofmen.mapchat.model.Location;
-import com.hoofmen.mapchat.model.MapMessage;
-
-import javax.swing.text.View;
+import java.util.List;
 
 @Controller
 public class MapChat {
@@ -64,23 +54,20 @@ public class MapChat {
 			@RequestParam(value = "rad", required = true) double rad,
 			@RequestParam(value = "max_messages", required = true) int max_messages) throws Exception {
 
-        //just to test the ErrorHandler
-		if (max_messages == 0){
-            throw new UrlParamNotFoundException(AppConstants.ERROR_URL_PARAM_NOT_FOUND);
-        }
-		ViewArea viewArea = buildViewArea(lat, lon, rad);
+		MapMessageRequest mapMessageRequest = buildMapMessageRequest(lat, lon, rad, max_messages);
 
-		return messageService.getMapMessagesGivenViewArea(viewArea);
+		return messageService.getMapMessages(mapMessageRequest);
 	}
 
-	private ViewArea buildViewArea(double lat, double lon, double rad){
-		ViewArea viewArea = new ViewArea();
+	private MapMessageRequest buildMapMessageRequest(double lat, double lon, double rad, int max_messages){
+		MapMessageRequest mapMessageRequest = new MapMessageRequest();
 		Location location = new Location();
 		location.setLat(lat);
 		location.setLon(lon);
-		viewArea.setLocation(location);
-		viewArea.setRadius(rad);
-		return viewArea;
+		mapMessageRequest.setLocation(location);
+		mapMessageRequest.setRadius(rad);
+		mapMessageRequest.setMaxMessages(max_messages);
+		return mapMessageRequest;
 	}
 
 	/**

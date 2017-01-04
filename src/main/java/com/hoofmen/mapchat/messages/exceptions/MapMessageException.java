@@ -1,15 +1,11 @@
-package com.hoofmen.mapchat.shared;
+package com.hoofmen.mapchat.messages.exceptions;
 
 /**
- * Created by osman on 1/2/17.
+ * Created by osman on 1/3/17.
  */
-public class UrlParamNotFoundException extends Exception {
-    private String code;
-    private String message;
-
-    public UrlParamNotFoundException(String code){
-        this.code = code;
-    }
+public class MapMessageException extends Exception {
+    protected String code;
+    protected String message;
 
     public String getCode() {
         return code;
