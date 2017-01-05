@@ -2,8 +2,8 @@ package com.hoofmen.mapchat;
 
 import com.hoofmen.mapchat.messages.MessageService;
 import com.hoofmen.mapchat.messages.beans.Location;
-import com.hoofmen.mapchat.messages.beans.MapMessageRequest;
 import com.hoofmen.mapchat.messages.beans.MapMessage;
+import com.hoofmen.mapchat.messages.beans.MapMessageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -79,5 +79,9 @@ public class MapChat {
 	public @ResponseBody MapMessage message(@RequestBody MapMessage message){
 		message.setMessage("response: " + message.getMessage());
 		return message;
+	}
+
+	public void setMessageService(MessageService messageService){
+		this.messageService = messageService;
 	}
 }

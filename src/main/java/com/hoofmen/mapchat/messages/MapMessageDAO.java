@@ -5,7 +5,9 @@ import com.hoofmen.mapchat.messages.beans.MapMessage;
 import com.hoofmen.mapchat.messages.beans.MapMessageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by osman on 1/2/17.

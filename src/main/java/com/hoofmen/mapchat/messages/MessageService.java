@@ -1,7 +1,7 @@
 package com.hoofmen.mapchat.messages;
 
-import com.hoofmen.mapchat.messages.beans.MapMessageRequest;
 import com.hoofmen.mapchat.messages.beans.MapMessage;
+import com.hoofmen.mapchat.messages.beans.MapMessageRequest;
 import com.hoofmen.mapchat.messages.exceptions.NoMessagesFoundException;
 
 import java.util.List;
