@@ -1,6 +1,10 @@
 package com.hoofmen.mapchat.messages.beans;
 
+import org.springframework.data.annotation.Id;
+
 public class MapMessage {
+	@Id
+	private String id;
 	private Location location;
 	private String message;
 	private int duration;

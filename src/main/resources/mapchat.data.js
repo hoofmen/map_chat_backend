@@ -15,7 +15,7 @@ db.mapmessages.save({ message:"Berlin", loc: {type:"Point", coordinates: [13.405
 db.mapmessages.save({ message:"Cologne", loc: {type:"Point", coordinates: [6.921272,50.960157]}})
 db.mapmessages.save({ message:"Dusseldorf", loc: {type:"Point", coordinates: [6.810036,51.224088]}})
 
-db.mapmessages.ensureIndex({position: "2dsphere"})
+db.mapmessages.ensureIndex({loc: "2dsphere"})
 
 
 

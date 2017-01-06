@@ -19,6 +19,8 @@
 		<spring.security.version>4.0.1.RELEASE</spring.security.version>
 		<jackson.version>2.3.0</jackson.version>
 		<servlet.version>3.0.1</servlet.version>
+		<spring.data.mongodb.version>1.9.2.RELEASE</spring.data.mongodb.version>
+		<mongo.driver.version>3.4.1</mongo.driver.version>
         <commons.lang.version>3.4</commons.lang.version>
 		<commons.collections.version>4.0</commons.collections.version>
         <jetty.version>9.2.11.v20150529</jetty.version>
@@ -37,7 +39,6 @@
 		</dependency>
 
 		<!-- Unit test dependencies -->
-
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -51,6 +52,7 @@
 			<version>${junit.version}</version>
             <scope>test</scope>
 		</dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -106,6 +108,19 @@
 			<version>${jackson.version}</version>
 		</dependency>
 
+		<!-- mongo stuff -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>${mongo.driver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>${spring.data.mongodb.version}</version>
+		</dependency>
+
+		<!-- Apache commons stuff -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
