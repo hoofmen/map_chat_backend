@@ -1,17 +1,11 @@
 package com.hoofmen.mapchat.security;
 
-import java.io.IOException;
+import com.hoofmen.mapchat.shared.AppConstants;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.hoofmen.mapchat.utils.AppConstants;
+import java.io.IOException;
 
 /*
  * Filter class to authenticate the rest calls for DataService.
