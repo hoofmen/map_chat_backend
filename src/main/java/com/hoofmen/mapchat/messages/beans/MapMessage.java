@@ -1,43 +1,48 @@
 package com.hoofmen.mapchat.messages.beans;
 
-public class MapMessage {
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.io.Serializable;
+
+@Document(collection = "mapmessages")
+public class MapMessage implements Serializable {
+	@Id
+	private ObjectId id;
 	private Location location;
 	private String message;
 	private int duration;
-	
-	/**
-	 * @return the location
-	 */
+
+
+	public ObjectId getId() {
+		return id;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+
 	public Location getLocation() {
 		return location;
 	}
-	/**
-	 * @param location the location to set
-	 */
+
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	/**
-	 * @return the message
-	 */
+
 	public String getMessage() {
 		return message;
 	}
-	/**
-	 * @param message the message to set
-	 */
+
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	/**
-	 * @return the duration
-	 */
+
 	public int getDuration() {
 		return duration;
 	}
-	/**
-	 * @param duration the duration to set
-	 */
+
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}

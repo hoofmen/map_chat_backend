@@ -1,5 +1,6 @@
 package com.hoofmen.mapchat.messages;
 
+import com.hoofmen.mapchat.messages.beans.Location;
 import com.hoofmen.mapchat.messages.beans.MapMessage;
 import com.hoofmen.mapchat.messages.beans.MapMessageRequest;
 import com.hoofmen.mapchat.messages.exceptions.NoMessagesFoundException;
@@ -20,11 +21,29 @@ public class MapMessageService implements MessageService {
     public MapMessageDAO messageDAO;
 
     @Override
-    public List<MapMessage> getMapMessages(MapMessageRequest locationMessagesRequest) throws NoMessagesFoundException {
-        List<MapMessage> messageList = messageDAO.getMapMessagesGivenViewArea(locationMessagesRequest);
+    public List<MapMessage> getMapMessages(double lat, double lon, double rad, int max_messages) throws NoMessagesFoundException {
+        MapMessageRequest mapMessageRequest = this.buildMapMessageRequest(lat, lon, rad, max_messages);
+        List<MapMessage> messageList = messageDAO.getMapMessages(mapMessageRequest);
         if (CollectionUtils.isEmpty(messageList)){
             throw new NoMessagesFoundException(AppConstants.WARN_NO_MESSAGES_FOUND);
         }
         return messageList;
+    }
+
+    @Override
+    public void saveMapMessage(MapMessage mapMessage){
+        messageDAO.saveMapMessage(mapMessage);
+    }
+
+    private MapMessageRequest buildMapMessageRequest(double lat, double lon, double rad, int max_messages){
+        MapMessageRequest mapMessageRequest = new MapMessageRequest();
+        Location location = new Location();
+        double[] coordinates = {lon, lat};
+        location.setType("Point");
+        location.setCoordinates(coordinates);
+        mapMessageRequest.setLocation(location);
+        mapMessageRequest.setRadius(rad);
+        mapMessageRequest.setMaxMessages(max_messages);
+        return mapMessageRequest;
     }
 }
