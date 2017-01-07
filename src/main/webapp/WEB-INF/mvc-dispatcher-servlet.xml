@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
@@ -12,8 +12,6 @@
 		http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<mvc:annotation-driven />
-
-    <mongo:repositories base-package="com.hoofmen.mapchat.messages"/>
 	<context:component-scan base-package="com.hoofmen.mapchat" />
 
 	<bean id="messageSource"
@@ -23,17 +21,28 @@
 		</property>
 	</bean>
 
-    <mongo:mongo host="localhost" port="27017" />
+	<bean id="mappingContext"
+		  class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
 
+	<bean id="defaultMongoTypeMapper"
+		  class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
+		<constructor-arg name="typeKey"><null/></constructor-arg>
+	</bean>
 
-    <mongo:db-factory dbname="mapchat" mongo-ref="mongo"/>
+	<bean id="mappingMongoConverter"
+		  class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+		<constructor-arg name="mappingContext" ref="mappingContext" />
+		<property name="typeMapper" ref="defaultMongoTypeMapper" />
+	</bean>
 
-
-    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
-    </bean>
-
-
+	<mongo:mongo host="localhost" port="27017" />
+	<mongo:db-factory dbname="mapchat" mongo-ref="mongo"/>
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
+		<constructor-arg name="mongoConverter" ref="mappingMongoConverter" />
+	</bean>
+	<mongo:repositories base-package="com.hoofmen.mapchat.messages"/>
 
 </beans>
 

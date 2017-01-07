@@ -1,31 +1,25 @@
 package com.hoofmen.mapchat.messages.beans;
 
 public class Location {
-	private double lon;
-	private double lat;
-	
-	/**
-	 * @return the lonitude
-	 */
-	public double getLon() {
-		return lon;
+
+	private String type;
+
+	private double[] coordinates;
+
+	public String getType() {
+		return type;
 	}
-	/**
-	 * @param lon the longitude to set
-	 */
-	public void setLon(double lon) {
-		this.lon = lon;
+
+	public void setType(String type) {
+		this.type = type;
 	}
-	/**
-	 * @return the latitude
-	 */
-	public double getLat() {
-		return lat;
+
+	public double[] getCoordinates() {
+		return coordinates;
 	}
-	/**
-	 * @param lat the latitude to set
-	 */
-	public void setLat(double lat) {
-		this.lat = lat;
+
+	public void setCoordinates(double[] coordinates) {
+		this.coordinates = coordinates;
 	}
+
 }
