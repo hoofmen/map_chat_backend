@@ -6,6 +6,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -22,7 +23,7 @@ public class AppExceptionHandler {
     @Autowired
     private MessageSource messageSource;
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(NoMessagesFoundException.class)
+    @ExceptionHandler(NoMessagesFoundException.class)
     @ResponseStatus(value= HttpStatus.OK)
     @ResponseBody
     public AppMessage messagesNotFound(HttpServletRequest req, NoMessagesFoundException ex) {

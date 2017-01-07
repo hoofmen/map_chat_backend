@@ -13,6 +13,7 @@
         <artifact.name>mapchat</artifact.name>
         <java.version>1.7</java.version>
 		<junit.version>4.12</junit.version>
+		<spring.test.version>4.2.9.RELEASE</spring.test.version>
         <mockito.version>1.9.5</mockito.version>
 		<org.junit.version>4.7.0</org.junit.version>
 		<spring.version>4.3.5.RELEASE</spring.version>
@@ -56,7 +57,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>4.1.7.RELEASE</version>
+            <version>${spring.test.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -106,6 +107,12 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20160810</version>
 		</dependency>
 
 		<!-- mongo stuff -->
