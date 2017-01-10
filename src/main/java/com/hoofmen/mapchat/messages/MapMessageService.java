@@ -5,7 +5,9 @@ import com.hoofmen.mapchat.messages.beans.MapMessage;
 import com.hoofmen.mapchat.messages.beans.MapMessageRequest;
 import com.hoofmen.mapchat.messages.exceptions.NoMessagesFoundException;
 import com.hoofmen.mapchat.shared.AppConstants;
+import com.hoofmen.mapchat.utils.LogUtils;
 import org.apache.commons.collections4.CollectionUtils;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.List;
  */
 @Service
 public class MapMessageService implements MessageService {
+    static final Logger logger = LogUtils.buildLogClient(MapMessageService.class);
 
     @Autowired
     public MapMessageDAO messageDAO;
@@ -25,6 +28,17 @@ public class MapMessageService implements MessageService {
         MapMessageRequest mapMessageRequest = this.buildMapMessageRequest(lat, lon, rad, max_messages);
         List<MapMessage> messageList = messageDAO.getMapMessages(mapMessageRequest);
         if (CollectionUtils.isEmpty(messageList)){
+            logger.warn("No messages found near the requested point!");
+            throw new NoMessagesFoundException(AppConstants.WARN_NO_MESSAGES_FOUND);
+        }
+        return messageList;
+    }
+
+    @Override
+    public List<MapMessage> getAllMapMessages() throws NoMessagesFoundException {
+        List<MapMessage> messageList = messageDAO.getAllMapMessages();
+        if (CollectionUtils.isEmpty(messageList)){
+            logger.warn("No messages found at all !");
             throw new NoMessagesFoundException(AppConstants.WARN_NO_MESSAGES_FOUND);
         }
         return messageList;

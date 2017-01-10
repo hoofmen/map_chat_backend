@@ -11,5 +11,7 @@ import java.util.List;
 public interface MessageService {
     List<MapMessage> getMapMessages(double lat, double lon, double rad, int max_messages) throws NoMessagesFoundException;
 
+    List<MapMessage> getAllMapMessages() throws NoMessagesFoundException;
+
     void saveMapMessage(MapMessage mapMessage);
 }

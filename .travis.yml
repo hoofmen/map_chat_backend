@@ -13,6 +13,7 @@ before_deploy:
 
   
 after_success:
+  mvn clean heroku:deploy-war
 
 after_failure:
 
