@@ -4,7 +4,7 @@ jdk:
 before_install:
 - openssl aes-256-cbc -K $encrypted_96bda7d7fff5_key -iv $encrypted_96bda7d7fff5_iv
   -in client_secret.json.enc -out client_secret.json -d
-script: mvn clean compile install
+script: mvn clean install
 before_deploy: 
 after_success: 
 after_failure: 
