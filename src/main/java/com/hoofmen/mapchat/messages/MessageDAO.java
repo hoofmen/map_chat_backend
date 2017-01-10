@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface MessageDAO {
 
-    List<MapMessage> getAllMapMessages(MapMessageRequest mapMessageRequest);
+    List<MapMessage> getAllMapMessages();
 
     List<MapMessage> getMapMessages(MapMessageRequest mapMessageRequest);
 

@@ -40,6 +40,11 @@ public class MapChat {
 		return messageService.getMapMessages(lat, lon, rad, max_messages);
 	}
 
+	@RequestMapping(value = "/messages/all", method = RequestMethod.GET)
+	public @ResponseBody List<MapMessage> getAllMessages() throws Exception {
+		return messageService.getAllMapMessages();
+	}
+
 
 
 	/**
