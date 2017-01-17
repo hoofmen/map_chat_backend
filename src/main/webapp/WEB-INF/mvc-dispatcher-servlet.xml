@@ -21,6 +21,44 @@
 		</property>
 	</bean>
 
+	
+	<bean id="MongoClientURI" class="com.mongodb.MongoClientURI">
+		<constructor-arg value="mongodb://mapchat:mapchat123@ds159348.mlab.com:59348/mapchat" />
+	</bean>
+	<bean id="mongoClient" class="com.mongodb.MongoClient">
+		<constructor-arg ref="MongoClientURI" />
+	</bean>
+
+	<bean id="simpleMongoDbFactory" class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
+		<constructor-arg name="mongoClient" ref="mongoClient" />
+		<constructor-arg name="databaseName" value="mapchat" />
+	</bean>
+
+	<bean id="typeMapper" class="org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper">
+		<constructor-arg name="typeKey"><null/></constructor-arg>
+	</bean>
+
+	<bean id="mappingContext" class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
+	
+	<bean id="converter" class="org.springframework.data.mongodb.core.convert.MappingMongoConverter">
+		<constructor-arg name="mongoDbFactory" ref="simpleMongoDbFactory" />
+		<constructor-arg name="mappingContext" ref="mappingContext" />
+		<property name="typeMapper" ref="typeMapper" />
+	</bean>
+
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="simpleMongoDbFactory"/>
+		<constructor-arg name="mongoConverter" ref="converter" />
+	</bean>
+
+
+
+	<!--
+	<mongo:mongo host="localhost" port="27017" />
+	<mongo:db-factory dbname="mapchat" username="mapchat" password="mapchat123" mongo-ref="mongo"/>
+	-->
+
+
 	<!--
 	<bean id="mappingContext"
 		  class="org.springframework.data.mongodb.core.mapping.MongoMappingContext" />
@@ -38,8 +76,6 @@
 	</bean>
 
 
-	<mongo:mongo host="localhost" port="27017" />
-	<mongo:db-factory dbname="mapchat" username="mapchat" password="mapchat123" mongo-ref="mongo"/>
 
 	<mongo:mongo id="mongo" host="ds159348.mlab.com" port="59348" />
 	<mongo:db-factory id="mongoDbFactory" host="ds159348.mlab.com" port="59348" dbname="mapchat" username="mapchat" password="mapchat123"  mongo-ref="mongo"/>
@@ -50,6 +86,7 @@
 	</bean>
 	<mongo:repositories base-package="com.hoofmen.mapchat.messages"/>
 	-->
+	
 </beans>
 
 

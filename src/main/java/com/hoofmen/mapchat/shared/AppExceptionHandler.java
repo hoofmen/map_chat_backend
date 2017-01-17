@@ -1,5 +1,6 @@
 package com.hoofmen.mapchat.shared;
 
+import com.hoofmen.mapchat.messages.exceptions.CouldNotConnectToDataBaseException;
 import com.hoofmen.mapchat.messages.exceptions.NoMessagesFoundException;
 import com.hoofmen.mapchat.utils.LogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,21 @@ public class AppExceptionHandler {
         appMessage.setCode(errorCode);
         appMessage.setMessage(errorMessage);
 	    logger.warn("Messages not found:" + ex.getCode());
+
+        return appMessage;
+    }
+
+    @ExceptionHandler(CouldNotConnectToDataBaseException.class)
+    @ResponseStatus(value= HttpStatus.OK)
+    @ResponseBody
+    public AppMessage couldNotConnectToDataBase(HttpServletRequest req, CouldNotConnectToDataBaseException ex) {
+        Locale locale = LocaleContextHolder.getLocale();
+        String errorMessage = messageSource.getMessage(ex.getCode(), null, locale);
+        String errorCode = ex.getCode();
+        AppMessage appMessage = new AppMessage();
+        appMessage.setCode(errorCode);
+        appMessage.setMessage(errorMessage);
+        logger.warn("Could not connect to the database:" + ex.getCode());
 
         return appMessage;
     }

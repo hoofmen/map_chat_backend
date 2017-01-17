@@ -30,7 +30,7 @@ public class MapMessageDAO implements MessageDAO{
 
     static final Logger logger = LogUtils.buildLogClient(MessageDAO.class);
 
-    //@Autowired
+    @Autowired
     private MongoTemplate mongoTemplate;
 
     private void initMongoTemplate(){
@@ -49,14 +49,14 @@ public class MapMessageDAO implements MessageDAO{
 
     @Override
     public List<MapMessage> getAllMapMessages(){
-        initMongoTemplate();
+//        initMongoTemplate();
         logger.debug("Trying to get all map messages...");
         return mongoTemplate.findAll(MapMessage.class);
     }
 
     @Override
     public List<MapMessage> getMapMessages(MapMessageRequest mapMessageRequest){
-        initMongoTemplate();
+//        initMongoTemplate();
         logger.debug("Trying to get the map messages near this point [lon,lat] = [" + mapMessageRequest.getLocation().getCoordinates()[0] + "," + mapMessageRequest.getLocation().getCoordinates()[1] + "] ...");
         Point point = new Point(mapMessageRequest.getLocation().getCoordinates()[0],mapMessageRequest.getLocation().getCoordinates()[1]);
         Distance distance = new Distance(mapMessageRequest.getRadius(), Metrics.KILOMETERS);
@@ -72,7 +72,7 @@ public class MapMessageDAO implements MessageDAO{
 
     @Override
     public void saveMapMessage(MapMessage mapMessage){
-        initMongoTemplate();
+//        initMongoTemplate();
         logger.debug("Trying to post a new map message...");
         mongoTemplate.save(mapMessage);
     }

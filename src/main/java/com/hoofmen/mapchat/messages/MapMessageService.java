@@ -3,12 +3,14 @@ package com.hoofmen.mapchat.messages;
 import com.hoofmen.mapchat.messages.beans.Location;
 import com.hoofmen.mapchat.messages.beans.MapMessage;
 import com.hoofmen.mapchat.messages.beans.MapMessageRequest;
+import com.hoofmen.mapchat.messages.exceptions.CouldNotConnectToDataBaseException;
 import com.hoofmen.mapchat.messages.exceptions.NoMessagesFoundException;
 import com.hoofmen.mapchat.shared.AppConstants;
 import com.hoofmen.mapchat.utils.LogUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,9 +26,15 @@ public class MapMessageService implements MessageService {
     public MapMessageDAO messageDAO;
 
     @Override
-    public List<MapMessage> getMapMessages(double lat, double lon, double rad, int max_messages) throws NoMessagesFoundException {
+    public List<MapMessage> getMapMessages(double lat, double lon, double rad, int max_messages) throws NoMessagesFoundException, CouldNotConnectToDataBaseException {
         MapMessageRequest mapMessageRequest = this.buildMapMessageRequest(lat, lon, rad, max_messages);
-        List<MapMessage> messageList = messageDAO.getMapMessages(mapMessageRequest);
+        List<MapMessage> messageList;
+        try {
+            messageList = messageDAO.getMapMessages(mapMessageRequest);
+        }catch(DataAccessResourceFailureException ex){
+            logger.warn("Could not connect to db !");
+            throw new CouldNotConnectToDataBaseException(AppConstants.ERROR_COULD_NOT_CONNECT_TO_DB);
+        }
         if (CollectionUtils.isEmpty(messageList)){
             logger.warn("No messages found near the requested point!");
             throw new NoMessagesFoundException(AppConstants.WARN_NO_MESSAGES_FOUND);
@@ -35,8 +43,14 @@ public class MapMessageService implements MessageService {
     }
 
     @Override
-    public List<MapMessage> getAllMapMessages() throws NoMessagesFoundException {
-        List<MapMessage> messageList = messageDAO.getAllMapMessages();
+    public List<MapMessage> getAllMapMessages() throws NoMessagesFoundException, CouldNotConnectToDataBaseException {
+        List<MapMessage> messageList;
+        try {
+            messageList = messageDAO.getAllMapMessages();
+        } catch (DataAccessResourceFailureException ex){
+            logger.warn("Could not connect to db !");
+            throw new CouldNotConnectToDataBaseException(AppConstants.ERROR_COULD_NOT_CONNECT_TO_DB);
+        }
         if (CollectionUtils.isEmpty(messageList)){
             logger.warn("No messages found at all !");
             throw new NoMessagesFoundException(AppConstants.WARN_NO_MESSAGES_FOUND);
@@ -45,8 +59,13 @@ public class MapMessageService implements MessageService {
     }
 
     @Override
-    public void saveMapMessage(MapMessage mapMessage){
-        messageDAO.saveMapMessage(mapMessage);
+    public void saveMapMessage(MapMessage mapMessage) throws CouldNotConnectToDataBaseException{
+        try {
+            messageDAO.saveMapMessage(mapMessage);
+        }catch(DataAccessResourceFailureException ex){
+            logger.warn("Could not connect to db !");
+            throw new CouldNotConnectToDataBaseException(AppConstants.ERROR_COULD_NOT_CONNECT_TO_DB);
+        }
     }
 
     private MapMessageRequest buildMapMessageRequest(double lat, double lon, double rad, int max_messages){

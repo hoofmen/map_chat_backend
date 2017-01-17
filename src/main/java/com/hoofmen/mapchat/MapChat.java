@@ -42,7 +42,8 @@ public class MapChat {
 
 	@RequestMapping(value = "/messages/all", method = RequestMethod.GET)
 	public @ResponseBody List<MapMessage> getAllMessages() throws Exception {
-		return messageService.getAllMapMessages();
+		List<MapMessage> messageList = messageService.getAllMapMessages();
+		return messageList;
 	}
 
 
@@ -53,7 +54,7 @@ public class MapChat {
 	 * @return
 	 */
 	@RequestMapping(value = "/messages", method = RequestMethod.POST)
-	public @ResponseBody AppMessage postMessage(HttpServletRequest request, @RequestBody MapMessage message){
+	public @ResponseBody AppMessage postMessage(HttpServletRequest request, @RequestBody MapMessage message) throws Exception {
 		messageService.saveMapMessage(message);
 		return appMessageFactory.getSuccessMessage(request, AppConstants.OK_MESSAGE_SAVED);
 	}
