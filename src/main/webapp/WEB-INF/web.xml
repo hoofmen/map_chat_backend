@@ -22,8 +22,18 @@
 		<filter-name>AuthenticationFilter</filter-name>
 		<filter-class>com.hoofmen.mapchat.security.AuthenticationFilter</filter-class>
 	</filter>
-	<filter-mapping>
-		<filter-name>AuthenticationFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+	<filter>
+		<filter-name>corsFilter</filter-name>
+		<filter-class>com.hoofmen.mapchat.security.CorsFilter</filter-class>
+	</filter>
+    <filter-mapping>
+        <filter-name>corsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>

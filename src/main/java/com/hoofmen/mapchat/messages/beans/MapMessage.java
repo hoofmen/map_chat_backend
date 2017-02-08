@@ -1,6 +1,5 @@
 package com.hoofmen.mapchat.messages.beans;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,17 +8,17 @@ import java.io.Serializable;
 @Document(collection = "mapmessages")
 public class MapMessage implements Serializable {
 	@Id
-	private ObjectId id;
+	private Integer id;
 	private Location location;
 	private String message;
 	private int duration;
 
 
-	public ObjectId getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(ObjectId id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
