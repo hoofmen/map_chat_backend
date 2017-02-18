@@ -4,21 +4,22 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @Document(collection = "mapmessages")
 public class MapMessage implements Serializable {
 	@Id
-	private Integer id;
+	private UUID id;
 	private Location location;
 	private String message;
 	private int duration;
 
 
-	public Integer getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
