@@ -1,12 +1,16 @@
-package com.hoofmen.mapchat.messages.beans;
+package com.hoofmen.mapchat.messages.beans.dao;
 
-import com.hoofmen.mapchat.messages.beans.Location;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class MapMessage {
+@Document(collection = "mapmessages")
+public class MapMessageDAO implements Serializable {
+	@Id
 	private UUID id;
-	private Location location;
+	private LocationDAO location;
 	private String message;
 	private int duration;
 
@@ -19,11 +23,11 @@ public class MapMessage {
 		this.id = id;
 	}
 
-	public Location getLocation() {
+	public LocationDAO getLocation() {
 		return location;
 	}
 
-	public void setLocation(Location location) {
+	public void setLocation(LocationDAO location) {
 		this.location = location;
 	}
 

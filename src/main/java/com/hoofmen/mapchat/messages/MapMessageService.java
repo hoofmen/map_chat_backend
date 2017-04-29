@@ -23,11 +23,11 @@ public class MapMessageService implements MessageService {
     static final Logger logger = LogUtils.buildLogClient(MapMessageService.class);
 
     @Autowired
-    public MapMessageDAO messageDAO;
+    public MapMessageServiceDAO messageDAO;
 
     @Override
-    public List<MapMessage> getMapMessages(double lat, double lon, double rad, int max_messages) throws NoMessagesFoundException, CouldNotConnectToDataBaseException {
-        MapMessageRequest mapMessageRequest = this.buildMapMessageRequest(lat, lon, rad, max_messages);
+    public List<MapMessage> getMapMessages(double lat, double lng, double rad, int max_messages) throws NoMessagesFoundException, CouldNotConnectToDataBaseException {
+        MapMessageRequest mapMessageRequest = this.buildMapMessageRequest(lat, lng, rad, max_messages);
         List<MapMessage> messageList;
         try {
             messageList = messageDAO.getMapMessages(mapMessageRequest);
@@ -68,12 +68,11 @@ public class MapMessageService implements MessageService {
         }
     }
 
-    private MapMessageRequest buildMapMessageRequest(double lat, double lon, double rad, int max_messages){
+    private MapMessageRequest buildMapMessageRequest(double lat, double lng, double rad, int max_messages){
         MapMessageRequest mapMessageRequest = new MapMessageRequest();
         Location location = new Location();
-        double[] coordinates = {lon, lat};
-        location.setType("Point");
-        location.setCoordinates(coordinates);
+        location.setLat(lat);
+        location.setLng(lng);
         mapMessageRequest.setLocation(location);
         mapMessageRequest.setRadius(rad);
         mapMessageRequest.setMaxMessages(max_messages);
