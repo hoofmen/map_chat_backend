@@ -24,7 +24,7 @@ public class MapChat {
 	/**
 	 * Get a list of messages depending on:
 	 * @param lat Latitude
-	 * @param lon Longitude
+	 * @param lng Longitude
 	 * @param rad Radius
 	 * @param max_messages Max number of messages to receive
 	 * @return
@@ -33,11 +33,11 @@ public class MapChat {
 	public @ResponseBody List<MapMessage> getAreaMessages(
 			//TODO: Should get a location object instead
 			@RequestParam(value = "lat", required = true) double lat,
-			@RequestParam(value = "lon", required = true) double lon,
+			@RequestParam(value = "lng", required = true) double lng,
 			@RequestParam(value = "rad", required = true) double rad,
 			@RequestParam(value = "max_messages", required = true) int max_messages) throws Exception {
 
-		return messageService.getMapMessages(lat, lon, rad, max_messages);
+		return messageService.getMapMessages(lat, lng, rad, max_messages);
 	}
 
 	@RequestMapping(value = "/messages/all", method = RequestMethod.GET)

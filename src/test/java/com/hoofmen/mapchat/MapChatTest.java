@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hoofmen.mapchat.messages.MessageService;
 import com.hoofmen.mapchat.messages.beans.Location;
 import com.hoofmen.mapchat.messages.beans.MapMessage;
+import com.hoofmen.mapchat.messages.beans.dao.LocationDAO;
+import com.hoofmen.mapchat.messages.beans.dao.MapMessageDAO;
 import com.hoofmen.mapchat.messages.exceptions.NoMessagesFoundException;
 import com.hoofmen.mapchat.shared.AppConstants;
 import com.hoofmen.mapchat.shared.AppExceptionHandler;
@@ -87,7 +89,7 @@ public class MapChatTest {
         List<MapMessage> responseMapMessageList = mapChat.getAreaMessages(37.76582,-121.90761,1000,4);
         assertTrue(responseMapMessageList.size()==4);
 
-        ResultActions perform = mockMvc.perform(get("/messages?lat=37.76582&lon=-121.90761&rad=10&max_messages=6").requestAttr(AppConstants.HEADER_TOKEN, AppConstants.TOKEN)).andExpect(status().isOk());
+        ResultActions perform = mockMvc.perform(get("/messages?lat=37.76582&lng=-121.90761&rad=10&max_messages=6").requestAttr(AppConstants.HEADER_TOKEN, AppConstants.TOKEN)).andExpect(status().isOk());
         assertTrue(contentType.toString().equalsIgnoreCase(perform.andReturn().getResponse().getContentType()));
     }
 
@@ -95,7 +97,7 @@ public class MapChatTest {
     public void testGetMessagesNoMessagesFound() throws Exception {
         mockMvc = MockMvcBuilders.standaloneSetup(mapChat).setControllerAdvice(appExceptionHandler).build();
         when(messageServiceMock.getMapMessages(anyDouble(),anyDouble(),anyDouble(),anyInt())).thenThrow(new NoMessagesFoundException(AppConstants.WARN_NO_MESSAGES_FOUND));
-        ResultActions perform = mockMvc.perform(get("/messages?lat=37.76582&lon=-121.90761&rad=10&max_messages=6").requestAttr(AppConstants.HEADER_TOKEN, AppConstants.TOKEN)).andExpect(status().isOk());
+        ResultActions perform = mockMvc.perform(get("/messages?lat=37.76582&lng=-121.90761&rad=10&max_messages=6").requestAttr(AppConstants.HEADER_TOKEN, AppConstants.TOKEN)).andExpect(status().isOk());
         assertTrue(contentType.toString().equalsIgnoreCase(perform.andReturn().getResponse().getContentType()));
         JSONObject json = new JSONObject(perform.andReturn().getResponse().getContentAsString());
         assertTrue(json.get("code").toString().equalsIgnoreCase(AppConstants.WARN_NO_MESSAGES_FOUND));
