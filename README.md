@@ -3,6 +3,9 @@ MapChat Service (backend)
 
 General idea is to post messages in a Map.
 
+### Status
+[![Build Status](https://travis-ci.org/hoofmen/mapchat_service.svg?branch=master)](https://github.com/hoofmen/mapchat_service)
+
 ### Message Format (JSON)
 ```json
 {
@@ -24,8 +27,8 @@ General idea is to post messages in a Map.
 * Spring Data MongoDB 1.9.6
 
 ### Data
-Mongo DB 3 - Hosted on mLab
+Mongo DB 3 - (Hosted on mLab)
 
-### Status
-[![Build Status](https://travis-ci.org/hoofmen/mapchat_service.svg?branch=master)](https://github.com/hoofmen/mapchat_service)
+### Deployment
+https://mymapchat.herokuapp.com
 
