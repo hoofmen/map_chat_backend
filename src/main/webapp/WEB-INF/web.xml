@@ -28,12 +28,12 @@
     </filter-mapping>
 
 	<filter>
-		<filter-name>corsFilter</filter-name>
+		<filter-name>CorsFilter</filter-name>
 		<filter-class>com.hoofmen.mapchat.security.CorsFilter</filter-class>
 	</filter>
     <filter-mapping>
-        <filter-name>corsFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>*</url-pattern>
     </filter-mapping>
 
 </web-app>
