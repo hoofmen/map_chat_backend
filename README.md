@@ -1,7 +1,7 @@
 MapChat Service (backend)
 =========================
 
-General idea is to post messages in a Map.
+General idea is to post and display short messages in a Map.
 
 ### Status
 [![Build Status](https://travis-ci.org/hoofmen/mapchat_service.svg?branch=master)](https://github.com/hoofmen/mapchat_service)
