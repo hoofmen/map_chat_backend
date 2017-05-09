@@ -27,5 +27,5 @@ General idea is to post messages in a Map.
 Mongo DB 3 - Hosted on mLab
 
 ### Status
-[![Build Status](https://travis-ci.org/hoofmen/map_chat_backend.svg?branch=master)](https://github.com/hoofmen/mapchat_service)
+[![Build Status](https://travis-ci.org/hoofmen/mapchat_service.svg?branch=master)](https://github.com/hoofmen/mapchat_service)
 
