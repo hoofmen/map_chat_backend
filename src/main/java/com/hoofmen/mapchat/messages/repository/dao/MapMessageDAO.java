@@ -1,4 +1,4 @@
-package com.hoofmen.mapchat.messages.beans.dao;
+package com.hoofmen.mapchat.messages.repository.dao;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

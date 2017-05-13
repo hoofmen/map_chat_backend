@@ -1,4 +1,4 @@
-package com.hoofmen.mapchat.messages.beans;
+package com.hoofmen.mapchat.messages.model;
 
 public class Location {
 	private double lat;

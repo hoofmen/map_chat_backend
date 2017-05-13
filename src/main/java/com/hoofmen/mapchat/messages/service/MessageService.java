@@ -1,8 +1,8 @@
-package com.hoofmen.mapchat.messages;
+package com.hoofmen.mapchat.messages.service;
 
-import com.hoofmen.mapchat.messages.beans.MapMessage;
-import com.hoofmen.mapchat.messages.exceptions.CouldNotConnectToDataBaseException;
-import com.hoofmen.mapchat.messages.exceptions.NoMessagesFoundException;
+import com.hoofmen.mapchat.messages.model.MapMessage;
+import com.hoofmen.mapchat.messages.exception.CouldNotConnectToDataBaseException;
+import com.hoofmen.mapchat.messages.exception.NoMessagesFoundException;
 
 import java.util.List;
 

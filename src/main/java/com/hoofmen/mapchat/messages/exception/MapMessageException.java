@@ -1,4 +1,4 @@
-package com.hoofmen.mapchat.messages.exceptions;
+package com.hoofmen.mapchat.messages.exception;
 
 /**
  * Created by osman on 1/3/17.

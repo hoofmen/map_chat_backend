@@ -1,4 +1,4 @@
-package com.hoofmen.mapchat.messages.beans.dao;
+package com.hoofmen.mapchat.messages.repository.dao;
 
 public class LocationDAO {
 
