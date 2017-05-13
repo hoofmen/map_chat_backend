@@ -1,17 +1,15 @@
 package com.hoofmen.mapchat.shared;
 
-import com.hoofmen.mapchat.messages.exceptions.CouldNotConnectToDataBaseException;
-import com.hoofmen.mapchat.messages.exceptions.NoMessagesFoundException;
+import com.hoofmen.mapchat.messages.exception.CouldNotConnectToDataBaseException;
+import com.hoofmen.mapchat.messages.exception.NoMessagesFoundException;
 import com.hoofmen.mapchat.utils.LogUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
@@ -19,7 +17,9 @@ import java.util.Locale;
 /**
  * Created by osman on 1/2/17.
  */
+@EnableWebMvc
 @ControllerAdvice
+@RestController
 public class AppExceptionHandler {
     //TODO: This needs some refactoring
     static final Logger logger = LogUtils.buildLogClient(AppExceptionHandler.class);
@@ -27,10 +27,9 @@ public class AppExceptionHandler {
     @Autowired
     private MessageSource messageSource;
 
-    @ExceptionHandler(NoMessagesFoundException.class)
     @ResponseStatus(value= HttpStatus.OK)
-    @ResponseBody
-    public AppMessage messagesNotFound(HttpServletRequest req, NoMessagesFoundException ex) {
+    @ExceptionHandler(NoMessagesFoundException.class)
+    public @ResponseBody AppMessage messagesNotFound(HttpServletRequest req, NoMessagesFoundException ex) {
         Locale locale = LocaleContextHolder.getLocale();
         String errorMessage = messageSource.getMessage(ex.getCode(), null, locale);
         String errorCode = ex.getCode();
@@ -42,10 +41,9 @@ public class AppExceptionHandler {
         return appMessage;
     }
 
-    @ExceptionHandler(CouldNotConnectToDataBaseException.class)
     @ResponseStatus(value= HttpStatus.OK)
-    @ResponseBody
-    public AppMessage couldNotConnectToDataBase(HttpServletRequest req, CouldNotConnectToDataBaseException ex) {
+    @ExceptionHandler(CouldNotConnectToDataBaseException.class)
+    public @ResponseBody AppMessage couldNotConnectToDataBase(HttpServletRequest req, CouldNotConnectToDataBaseException ex) {
         Locale locale = LocaleContextHolder.getLocale();
         String errorMessage = messageSource.getMessage(ex.getCode(), null, locale);
         String errorCode = ex.getCode();

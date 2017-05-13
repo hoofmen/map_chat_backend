@@ -1,4 +1,4 @@
-package com.hoofmen.mapchat.messages.beans;
+package com.hoofmen.mapchat.messages.model;
 
 /**
  * Created by osman on 1/3/17.

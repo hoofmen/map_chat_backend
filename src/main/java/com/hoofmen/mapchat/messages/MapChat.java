@@ -1,18 +1,17 @@
-package com.hoofmen.mapchat;
+package com.hoofmen.mapchat.messages;
 
-import com.hoofmen.mapchat.messages.MessageService;
-import com.hoofmen.mapchat.messages.beans.MapMessage;
+import com.hoofmen.mapchat.messages.service.MessageService;
+import com.hoofmen.mapchat.messages.model.MapMessage;
 import com.hoofmen.mapchat.shared.AppConstants;
 import com.hoofmen.mapchat.shared.AppMessage;
 import com.hoofmen.mapchat.shared.AppMessageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-@Controller
+@RestController
 public class MapChat {
 
 	@Autowired

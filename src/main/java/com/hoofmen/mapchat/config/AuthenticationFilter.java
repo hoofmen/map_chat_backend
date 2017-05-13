@@ -1,4 +1,4 @@
-package com.hoofmen.mapchat.security;
+package com.hoofmen.mapchat.config;
 
 import com.hoofmen.mapchat.shared.AppConstants;
 

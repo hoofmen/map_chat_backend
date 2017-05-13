@@ -7,12 +7,12 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <mvc:annotation-driven />
 
-    <bean id="mapChat" class="com.hoofmen.mapchat.MapChat"/>
+    <bean id="mapChat" class="com.hoofmen.mapchat.messages.MapChat"/>
     <bean id="appMessageFactory" class="com.hoofmen.mapchat.shared.AppMessageFactory"/>
     <bean id="appExceptionHandler" class="com.hoofmen.mapchat.shared.AppExceptionHandler"/>
 
     <bean id="messageService" class="org.mockito.Mockito" factory-method="mock">
-        <constructor-arg value="com.hoofmen.mapchat.messages.MessageService"/>
+        <constructor-arg value="com.hoofmen.mapchat.messages.service.MessageService"/>
     </bean>
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">

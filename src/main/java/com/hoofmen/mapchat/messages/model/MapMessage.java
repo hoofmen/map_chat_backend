@@ -1,6 +1,4 @@
-package com.hoofmen.mapchat.messages.beans;
-
-import com.hoofmen.mapchat.messages.beans.Location;
+package com.hoofmen.mapchat.messages.model;
 
 import java.util.UUID;
 

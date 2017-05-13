@@ -1,8 +1,7 @@
-package com.hoofmen.mapchat.messages;
+package com.hoofmen.mapchat.messages.repository;
 
-import com.hoofmen.mapchat.messages.beans.MapMessage;
-import com.hoofmen.mapchat.messages.beans.dao.MapMessageDAO;
-import com.hoofmen.mapchat.messages.beans.MapMessageRequest;
+import com.hoofmen.mapchat.messages.model.MapMessage;
+import com.hoofmen.mapchat.messages.model.MapMessageRequest;
 
 import java.util.List;
 

@@ -1,10 +1,11 @@
-package com.hoofmen.mapchat.messages;
+package com.hoofmen.mapchat.messages.service;
 
-import com.hoofmen.mapchat.messages.beans.Location;
-import com.hoofmen.mapchat.messages.beans.MapMessage;
-import com.hoofmen.mapchat.messages.beans.MapMessageRequest;
-import com.hoofmen.mapchat.messages.exceptions.CouldNotConnectToDataBaseException;
-import com.hoofmen.mapchat.messages.exceptions.NoMessagesFoundException;
+import com.hoofmen.mapchat.messages.model.Location;
+import com.hoofmen.mapchat.messages.model.MapMessage;
+import com.hoofmen.mapchat.messages.model.MapMessageRequest;
+import com.hoofmen.mapchat.messages.exception.CouldNotConnectToDataBaseException;
+import com.hoofmen.mapchat.messages.exception.NoMessagesFoundException;
+import com.hoofmen.mapchat.messages.repository.MapMessageServiceDAO;
 import com.hoofmen.mapchat.shared.AppConstants;
 import com.hoofmen.mapchat.utils.LogUtils;
 import org.apache.commons.collections4.CollectionUtils;

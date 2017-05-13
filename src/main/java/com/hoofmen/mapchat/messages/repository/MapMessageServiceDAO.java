@@ -1,10 +1,10 @@
-package com.hoofmen.mapchat.messages;
+package com.hoofmen.mapchat.messages.repository;
 
-import com.hoofmen.mapchat.messages.beans.Location;
-import com.hoofmen.mapchat.messages.beans.MapMessage;
-import com.hoofmen.mapchat.messages.beans.MapMessageRequest;
-import com.hoofmen.mapchat.messages.beans.dao.LocationDAO;
-import com.hoofmen.mapchat.messages.beans.dao.MapMessageDAO;
+import com.hoofmen.mapchat.messages.model.Location;
+import com.hoofmen.mapchat.messages.model.MapMessage;
+import com.hoofmen.mapchat.messages.model.MapMessageRequest;
+import com.hoofmen.mapchat.messages.repository.dao.LocationDAO;
+import com.hoofmen.mapchat.messages.repository.dao.MapMessageDAO;
 import com.hoofmen.mapchat.utils.LogUtils;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +40,9 @@ public class MapMessageServiceDAO implements MessageServiceDAO {
         Point point = new Point(mapMessageRequest.getLocation().getLng(),mapMessageRequest.getLocation().getLat());
         Distance distance = new Distance(mapMessageRequest.getRadius(), Metrics.KILOMETERS);
         NearQuery nearQuery = NearQuery.near(point).maxDistance(distance);
-        GeoResults<com.hoofmen.mapchat.messages.beans.dao.MapMessageDAO> results = mongoTemplate.geoNear(nearQuery, com.hoofmen.mapchat.messages.beans.dao.MapMessageDAO.class);
-        List<com.hoofmen.mapchat.messages.beans.dao.MapMessageDAO> messageList = new ArrayList<>();
-        for (GeoResult<com.hoofmen.mapchat.messages.beans.dao.MapMessageDAO> result : results){
+        GeoResults<MapMessageDAO> results = mongoTemplate.geoNear(nearQuery, MapMessageDAO.class);
+        List<MapMessageDAO> messageList = new ArrayList<>();
+        for (GeoResult<MapMessageDAO> result : results){
             messageList.add(result.getContent());
         }
         logger.debug(messageList.size() + " messages found!");
