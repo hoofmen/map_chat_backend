@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 
 /**
- * Created by NIS1528 on 1/6/17.
+ * Created by osman on 1/6/17.
  */
 @Service
 public class AppMessageFactory {

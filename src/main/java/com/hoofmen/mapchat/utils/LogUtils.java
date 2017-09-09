@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
- * Created by NIS1528 on 1/9/17.
+ * Created by osman on 1/9/17.
  */
 public class LogUtils {
     public static Logger buildLogClient(Class<?> clazz){
